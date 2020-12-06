@@ -29,6 +29,9 @@ router.get('/api/posts/:id',(req,res)=>{
     posts.findById(req.params.id)
     // return Promise.reject()
     .then(post=>{
+        if(!post.length){
+            res.status(404).json({message:`post with id ${req.params.id} doesn't exist`})
+        }else
         res.status(200).json(post)
     })
     .catch(error=>{
@@ -74,13 +77,14 @@ router.post('/api/posts',(req,res)=>{
 //   add comments ?
 router.post('/api/posts/:id/comments',(req,res)=>{
     let {text}= req.body
-
+    let comment = req.body
+    comment.post_id = req.params.id
     if(!req.body.text){
         return res.status(400).json({errorMessage: "Please provide text for the comments."})
     }
-
-    posts.insertComment(req.body)
-    // return Promise.reject()
+    console.log('req.body ', req.body)
+    posts.insertComment(comment)
+    
     .then(comment=>{
         res.status(201).json(comment)
     })
