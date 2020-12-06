@@ -1,15 +1,38 @@
 import React,{useContext} from 'react'
+import axios from 'axios'
+import {useParams,useHistory} from 'react-router-dom'
+import { GlobalContext } from '../Contexts'
 
-const Post = ({post})=>{
+const Post = ()=>{
+    let params= useParams()
+    let {push} = useHistory()
+    let {setEditing,posts} = useContext(GlobalContext)
 
+    console.log('params',params)
+    
+
+    let post = posts.find(post=>post.id===Number(params.id))
+    const editPost =()=>{
+        push(`/updatepost/${params.id}`)
+        setEditing(true)
+    
+
+    }
+    const deletePost =()=>{
+        axios
+        .delete(`http://localhost:5000/api/posts/${post.id}`)
+        .then(res=>{console.log('deleted successfully');push('/')})
+        .catch(err=>console.log(err))
+    }
 
     return(
         <div className='post-card'>
-            <h3>{post.title}</h3>
+            <h4>{post.title}</h4>
             <p>{post.contents}</p>
             <div>
-                <button>Edit</button>
-                <button>delete</button>
+                <button onClick={()=>{editPost()}}>Edit</button>
+                <button onClick={()=>{deletePost()}}>delete</button>
+                <button onClick={()=>{push('/')}}>Cancel</button>
             </div>
 
         </div>
