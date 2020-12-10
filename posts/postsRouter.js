@@ -120,6 +120,7 @@ router.put('/api/posts/:id',(req,res)=>{
 //delete post
 
 router.delete('/api/posts/:id',(req,res)=>{
+    console.log('req.params.id',req.params.id)
     posts.remove(req.params.id)
     .then(()=>{
         res.send(`post with id ${req.params.id} deleted successfully`)

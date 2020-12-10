@@ -16,11 +16,13 @@ const Post = ()=>{
         push(`/updatepost/${params.id}`)
         setEditing(true)
     
+        
 
     }
     const deletePost =()=>{
+        console.log('post id ', post.id)
         axios
-        .delete(`https://mohamed-node3.herokuapp.com/posts/${post.id}`)
+        .delete(`https://mohamed-node-api4.herokuapp.com/api/posts/${post.id}`)
         .then(res=>{console.log('deleted successfully');push('/')})
         .catch(err=>console.log(err))
     }

@@ -7,7 +7,7 @@ const server = express()
 server.use(express.json())
 server.use(cors())
 
-server.use(postsRouter)
+server.use('https://mohamed-node-api4.herokuapp.com/',postsRouter)
 
 const PORT = process.env.PORT || 5000
 server.listen(PORT,()=>{

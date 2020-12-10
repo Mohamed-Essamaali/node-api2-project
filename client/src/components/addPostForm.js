@@ -21,7 +21,7 @@ const AddPost = ()=>{
     useEffect(()=>{
         
         axios
-        .get('http://localhost:5000/api/posts')
+        .get('https://mohamed-node-api4.herokuapp.com/api/posts')
         .then(res=>{setPosts(res.data);console.log(res.data)})
         .catch(err=>console.log(err))
     
@@ -31,14 +31,14 @@ const AddPost = ()=>{
        
        
         axios
-        .post(`https://mohamed-node3.herokuapp.com/posts`,post)
+        .post(`https://mohamed-node-api4.herokuapp.com/api/posts`,post)
         .then(res=>{
             console.log('Added post ',res.data);
              push('/');
              setPost({title:'',contents:''});
              
             axios
-            .get('https://mohamed-node3.herokuapp.com/posts')
+            .get('https://mohamed-node-api4.herokuapp.com/api/posts')
             .then(res=>{setPosts(res.data);console.log(res.data)})
             .catch(err=>console.log(err));
         })
