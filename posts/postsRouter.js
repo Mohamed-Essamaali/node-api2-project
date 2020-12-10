@@ -5,7 +5,11 @@ const posts = require('../data/db')
 const router = express.Router()
 
 router.get('/',(req,res)=>{
-    res.json({message:"Welcome to posts API"})
+    res.json({
+        message:`Welcome ${process.env.COHORT} to posts API`,
+        sprint : process.env.SPRINT || "No Sprint yet"
+
+    })
 })
 
 //   get all posts
