@@ -12,13 +12,7 @@ import EditPost from './components/editForm';
 
 function App() {
 
-
- console.log('app logs')
-
- 
-
-  
-  return (
+   return (
     <div className="App">
       <Link to ='/'> Home</Link>
 

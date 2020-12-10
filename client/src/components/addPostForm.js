@@ -1,4 +1,4 @@
-import React,{useContext,useState} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import { GlobalContext } from '../Contexts'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
@@ -9,7 +9,7 @@ import {useHistory} from 'react-router-dom'
 
 const AddPost = ()=>{
     let {push} = useHistory()
-    let {posts} = useContext(GlobalContext)
+    let {setPosts,} = useContext(GlobalContext)
     const[post,setPost] = useState({title:'',contents:''})
     const handleChanges = e=>{
         e.preventDefault()
@@ -18,15 +18,33 @@ const AddPost = ()=>{
     }
 
 
+    useEffect(()=>{
+        
+        axios
+        .get('http://localhost:5000/api/posts')
+        .then(res=>{setPosts(res.data);console.log(res.data)})
+        .catch(err=>console.log(err))
+    
+    },[])
     const AddNewPost=(e)=>{
         e.preventDefault()
        
        
         axios
-        .post(`http://localhost:5000/api/posts`,post)
-        .then(res=>{console.log('Added post ',res.data); push('/');setPost({title:'',contents:''})})
+        .post(`https://mohamed-node3.herokuapp.com/posts`,post)
+        .then(res=>{
+            console.log('Added post ',res.data);
+             push('/');
+             setPost({title:'',contents:''});
+             
+            axios
+            .get('https://mohamed-node3.herokuapp.com/posts')
+            .then(res=>{setPosts(res.data);console.log(res.data)})
+            .catch(err=>console.log(err));
+        })
         .catch(err=>{console.log('Error in adding post',err)})
     }
+ 
 
     return(
         <div className='form-post'>

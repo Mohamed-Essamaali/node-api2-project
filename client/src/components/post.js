@@ -20,7 +20,7 @@ const Post = ()=>{
     }
     const deletePost =()=>{
         axios
-        .delete(`http://localhost:5000/api/posts/${post.id}`)
+        .delete(`https://mohamed-node3.herokuapp.com/posts/${post.id}`)
         .then(res=>{console.log('deleted successfully');push('/')})
         .catch(err=>console.log(err))
     }

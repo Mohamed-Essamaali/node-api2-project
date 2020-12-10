@@ -26,7 +26,7 @@ const EditPost = ()=>{
         setEditing(false)
         push('/')
         axios
-        .put(`http://localhost:5000/api/posts/${post.id}`,post)
+        .put(`https://mohamed-node3.herokuapp.com/posts/${post.id}`,post)
         .then(res=>{console.log('updated post ',res.data)})
         .catch(err=>{console.log(err)})
         

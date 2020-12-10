@@ -13,7 +13,7 @@ let {setPosts,posts,editing}= useContext(GlobalContext)
     useEffect(()=>{
         
             axios
-            .get('http://localhost:5000/api/posts')
+            .get('https://mohamed-node3.herokuapp.com/posts')
             .then(res=>{setPosts(res.data);console.log(res.data)})
             .catch(err=>console.log(err))
         
